@@ -1,0 +1,21 @@
+[{
+  "id": 1,
+  "name": "商品名稱",
+  "price": 1000,
+  "img": "japan_asakusa_street.jpg",
+  "rating": 5
+},
+{
+  "id": 2,
+  "name": "商品名稱2",
+  "price": 2000,
+  "img": "japan_asakusa_street.jpg",
+  "rating": 2
+},
+{
+  "id": 3,
+  "name": "商品名稱2",
+  "price": 1000,
+  "img": "japan_asakusa_street.jpg",
+  "rating": 4
+}]

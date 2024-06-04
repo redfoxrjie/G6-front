@@ -1,6 +1,5 @@
 <template>
   <header>
- 
     <div class="wrapper">
       <nav>
         <RouterLink to="/">首頁</RouterLink>
@@ -16,11 +15,13 @@
   </header>
 
   <RouterView />
+  <!-- <PageHeader /> -->
   <PageFooter />
   
 </template>
 
 <script>
+import PageHeader from './components/home/PageHeader.vue'
 import { defineComponent } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
@@ -30,6 +31,7 @@ import SectionHotBlog from './components/home/SectionHotBlog.vue'
 import SectionTicket from './components/home/SectionTicket.vue'
 
 
+
 export default defineComponent({
   components: {
     RouterLink,
@@ -37,7 +39,8 @@ export default defineComponent({
     HelloWorld,
     PageFooter,
     SectionHotBlog,
-    SectionTicket
+    SectionTicket,
+    PageHeader
 
   }
 })
