@@ -68,7 +68,14 @@ const router = createRouter({
       name: 'newsPage',
       component: () => import('../views/NewsPageView.vue')
     }
+    ,
 
+    {
+      // path內冒號後面就是自己設定的,之後頁面內可以用useRoute 讀取路由id是多少
+          path: '/testInner/:id',
+          name: 'testInner',
+          component: () => import('../views/TestInnerView.vue')
+        }
     
   ]
 })

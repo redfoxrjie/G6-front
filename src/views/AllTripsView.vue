@@ -65,6 +65,7 @@
     <div class="container">
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
         <trip-card v-for="(n, i) in 6" :tcImg="trips[selectedCase][i].trp_img"
+        @click="goToSubPage(i)" 
           :tc-title="trips[selectedCase][i].trp_name" :tcMemName="trips[selectedCase][i].u_nickname"
           :key="trips[selectedCase][i].trp_id" />
 
@@ -78,7 +79,7 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
-// tab中文內容對照
+// rankTab中文內容對照
 const areaFormat = { 'jp': '日本', 'kr': "韓國", 'th': "泰國", 'hkmo': "港澳" };
 //紀錄資料 (綁定)
 const trips = ref([]);
@@ -136,7 +137,9 @@ const router = useRouter();
 const goToPage = (toLink) => {
   router.push(toLink);
 }
-
+const goToSubPage = (i) => {
+  router.push(`/testInner/${i}`);
+}
 // 執行
 fetchData();
 

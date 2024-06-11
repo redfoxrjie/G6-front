@@ -28,23 +28,26 @@
   <div class="section-blogList">
     <div class="container">
       <div class="blogList-row row row-cols-1 row-cols-md-2 row-cols-lg-3  row-cols-xxl-4">
-        <BCBlogCard v-for="(n, index) in currentCardLimit" :bcImg="blogs[index + currentShowIndex].image"
-          :bcTitle="blogs[index + currentShowIndex].name" :bcLikesCount="blogs[index + currentShowIndex].likes"
-          :bcViewsCount="blogs[index + currentShowIndex].viewers" :bcDate="blogs[index + currentShowIndex].date" />
+<!-- BCBlogCard 會根據目前頁面渲染哪組資料對應生成 
+ (資料來自currentCardList 這會算第一頁顯示0-8,第二頁9-17...最後一頁...)
+前往各自內頁 是透過  @click="goToSubPage(index)" index是v-for的索引值 (0,1,...)
+
+-->
+        <BCBlogCard v-for="(n, index) in currentCardLimit" @click="goToSubPage(index)"
+          :bcImg="blogs[index + currentShowIndex].image" :bcTitle="blogs[index + currentShowIndex].name"
+          :bcLikesCount="blogs[index + currentShowIndex].likes" :bcViewsCount="blogs[index + currentShowIndex].viewers"
+          :bcDate="blogs[index + currentShowIndex].date" />
       </div>
 
     </div>
   </div>
   <GCompPagination :totalItems="blogsCount" :pageLimit="9" :pageIndex="currentIndex"
     @emitClick="pagenationClickHandle" />
-<p>debug用 此頁顯示{{ currentCardLimit }} 筆資料,共有{{blogsCount}}筆資料</p>
+  <p>debug用 此頁顯示{{ currentCardLimit }} 筆資料,共有{{ blogsCount }}筆資料</p>
   <div class="debuggerCurrentShow">
     <span>(這裡是資料區塊之後會刪除並把按鈕移到下面)</span><span>父層ref---PAGE IS {{ currentIndex }}-----</span>
     <span v-for="(n, index) in itemsLimit">{{ blogs[index + currentShowIndex] }}</span>
   </div>
-
-
-
 
 </template>
 <style lang="scss" scoped>
@@ -160,7 +163,7 @@ const currentCardLimit = computed(() => {
 // const blogs =ref([]); //資料存取位置
 const blogs = []; //資料存取位置
 const blogsCount = ref(5); //先建立存取位置
-//data:資料總長度
+
 const fetchData = async () => {
   try {
     const response = await fetch('/json/data.json');
@@ -183,7 +186,10 @@ const router = useRouter();
 const goToPage = (toLink) => {
   router.push(toLink);
 }
-// pagination 元件接取索引
+const goToSubPage = (i) => {
+  router.push(`/testInner/${i}`);
+}
+// pagination 元件接取索引 )(算有幾頁產生幾個頁碼按鍵)
 const currentIndex = ref(1); //目前索引 頁面索引都從1開始
 const pagenationClickHandle = (data) => {
   currentIndex.value = data;
